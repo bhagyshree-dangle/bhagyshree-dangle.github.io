@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bhagyshree Dangle — AI-Enabled Operations & Quality</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root{
+    --ink:#0a1c1a; --ink-2:#112826; --ink-soft:#2c413e; --paper:#f4f6f1; --paper-2:#ffffff;
+    --line:#d7ddd2; --teal:#0f4d45; --teal-bright:#1b7a6e; --aqua:#56d6c2; --gold:#bf8a2c;
+    --green:#2f7d5b; --mute:#5c6b66;
+    --display:'Bricolage Grotesque',system-ui,sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink-2);
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+
+  /* scroll progress */
+  #progress{position:fixed;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;
+    background:linear-gradient(90deg,var(--teal),var(--aqua),var(--gold));z-index:100}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:60;background:rgba(244,246,241,.82);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .navin{display:flex;align-items:center;justify-content:space-between;height:62px;max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .brand{font-family:var(--mono);font-size:.8rem;letter-spacing:.18em;font-weight:500}
+  .brand b{color:var(--teal)}
+  .navlinks{display:flex;gap:26px;align-items:center}
+  .navlinks a{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);transition:color .2s}
+  .navlinks a:hover{color:var(--ink-2)}
+  .navcta{border:1.5px solid var(--ink-2);padding:8px 16px;border-radius:2px;color:var(--ink-2)!important;transition:.2s}
+  .navcta:hover{background:var(--ink-2);color:var(--paper)!important}
+  .burger{display:none;background:none;border:0;cursor:pointer;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+
+  /* HERO (dark stage) */
+  .hero{position:relative;background:radial-gradient(120% 120% at 70% 10%,#123a36 0%,var(--ink-2) 45%,var(--ink) 100%);
+    color:var(--paper);overflow:hidden;border-bottom:1px solid var(--ink-2)}
+  #bg3d{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+  .hero .wrap{position:relative;z-index:2}
+  .herogrid{display:grid;grid-template-columns:1.15fr .85fr;gap:54px;align-items:center;
+    padding:104px 0 92px;min-height:88vh}
+  .hero-eyebrow{color:var(--gold);margin-bottom:22px}
+  .hero-eyebrow .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-right:9px;vertical-align:middle;
+    box-shadow:0 0 12px var(--gold)}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(2.5rem,5.6vw,4.2rem);line-height:1.0;letter-spacing:-.02em}
+  .line{display:block;overflow:hidden}
+  .line-inner{display:inline-block}
+  h1 .em{color:var(--aqua);font-style:normal}
+  .lede{font-size:1.08rem;color:rgba(244,246,241,.82);margin-top:26px;max-width:34ch}
+  .herometa{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+  .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    border:1px solid rgba(244,246,241,.25);background:rgba(244,246,241,.05);padding:6px 11px;border-radius:2px;color:rgba(244,246,241,.85)}
+  .scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:2;
+    font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,246,241,.5)}
+  .scroll-hint::after{content:"";display:block;width:1px;height:26px;margin:8px auto 0;background:rgba(244,246,241,.4);animation:drop 1.8s ease-in-out infinite}
+  @keyframes drop{0%{transform:scaleY(.2);transform-origin:top;opacity:0}40%{opacity:1}100%{transform:scaleY(1);transform-origin:top;opacity:0}}
+
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:4px}
+  .scorecard{padding:22px 22px 8px;box-shadow:0 30px 70px -30px rgba(0,0,0,.55)}
+  .sc-head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:14px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+  .sc-head .ttl{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+  .sc-head .pg{font-family:var(--mono);font-size:.66rem;color:var(--mute)}
+  .crit{padding:15px 0;border-bottom:1px dashed var(--line)}
+  .crit:last-child{border-bottom:0}
+  .crit-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+  .crit-name{font-weight:600;font-size:.95rem;color:var(--ink-2)}
+  .chip{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;background:rgba(47,125,91,.12);color:var(--green);padding:4px 8px;border-radius:2px}
+  .bar{display:flex;gap:4px}
+  .seg{height:5px;flex:1;background:var(--line);border-radius:1px;transform-origin:left}
+  .seg.on{background:var(--teal)}
+  .crit-sub{font-family:var(--mono);font-size:.66rem;color:var(--mute);margin-top:9px;text-transform:none}
+
+  section{padding:84px 0;border-bottom:1px solid var(--line)}
+  .sec-eyebrow{color:var(--gold);margin-bottom:14px}
+  .sec-title{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,3.2vw,2.3rem);letter-spacing:-.015em;max-width:24ch}
+  .sec-intro{color:var(--ink-soft);max-width:60ch;margin-top:16px}
+
+  .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:start}
+  .about p+p{margin-top:16px}
+  .about p{color:var(--ink-soft)}
+
+  .specs{display:flex;flex-direction:column;gap:30px;margin-top:40px;perspective:1400px}
+  .spec{border:1px solid var(--line);border-radius:5px;background:var(--paper-2);overflow:hidden;
+    transform-style:preserve-3d;transition:box-shadow .3s ease;will-change:transform}
+  .spec:hover{box-shadow:0 26px 60px -34px rgba(17,40,38,.6)}
+  .spec-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:18px 22px;border-bottom:1px solid var(--line);
+    background:linear-gradient(0deg,transparent,rgba(15,77,69,.03))}
+  .spec-no{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;color:var(--gold)}
+  .spec-name{font-family:var(--display);font-weight:600;font-size:1.2rem;letter-spacing:-.01em;margin-top:3px}
+  .spec-kind{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);border:1px solid var(--line);padding:5px 9px;border-radius:2px;white-space:nowrap}
+  .spec-body{padding:22px}
+  .spec-desc{color:var(--ink-soft);font-size:.94rem;margin-bottom:20px;max-width:64ch}
+
+  table{width:100%;border-collapse:collapse;font-size:.86rem}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:500}
+  td .c-name{font-weight:600}
+  .score-pill{font-family:var(--mono);font-size:.66rem;padding:3px 8px;border-radius:2px;white-space:nowrap}
+  .s2{background:rgba(47,125,91,.14);color:var(--green)} .s1{background:rgba(191,138,44,.16);color:var(--gold)}
+  .worked{margin-top:18px;border:1px dashed var(--line);border-radius:4px;padding:16px;background:var(--paper)}
+  .worked .lbl{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+  .worked .row{font-size:.88rem;margin-bottom:7px}
+  .worked .row b{font-family:var(--mono);font-weight:500;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);display:inline-block;min-width:78px}
+
+  .prompts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .pcard{border:1px solid var(--line);border-radius:4px;padding:15px;background:var(--paper)}
+  .pcard .pno{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase}
+  .pcard h4{font-size:.92rem;margin:6px 0 10px}
+  .pcode{font-family:var(--mono);font-size:.72rem;line-height:1.5;background:var(--ink-2);color:#dfeae6;padding:11px;border-radius:3px;white-space:pre-wrap}
+  .guard{font-family:var(--mono);font-size:.64rem;color:var(--mute);margin-top:9px}
+  .guard b{color:var(--green);text-transform:uppercase;letter-spacing:.08em}
+
+  .flow{display:flex;flex-wrap:wrap}
+  .step{flex:1;min-width:120px;border:1px solid var(--line);border-radius:4px;padding:14px;background:var(--paper);margin:6px}
+  .step.gate{border-color:var(--teal);background:rgba(15,77,69,.05)}
+  .step .sn{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--mute)}
+  .step .st{font-weight:600;font-size:.9rem;margin:6px 0 4px}
+  .step.gate .st{color:var(--teal)}
+  .step .stool{font-family:var(--mono);font-size:.64rem;color:var(--teal-bright)}
+
+  .check{columns:2;column-gap:30px}
+  .citem{display:flex;gap:10px;padding:8px 0;break-inside:avoid;font-size:.9rem}
+  .box{flex:none;width:16px;height:16px;border:1.5px solid var(--teal);border-radius:3px;margin-top:3px;position:relative}
+  .box::after{content:"";position:absolute;left:4px;top:0;width:5px;height:9px;border:solid var(--teal);border-width:0 2px 2px 0;transform:rotate(42deg)}
+
+  .dash{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .tile{border:1px solid var(--line);border-radius:4px;padding:15px;background:var(--paper)}
+  .tile .tk{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+  .tile .tv{font-family:var(--display);font-weight:700;font-size:1.7rem;color:var(--teal);margin-top:6px;line-height:1}
+  .tile .tnote{font-family:var(--mono);font-size:.6rem;color:var(--mute);margin-top:6px}
+  .minibar{display:flex;gap:3px;margin-top:10px;align-items:flex-end;height:30px}
+  .minibar span{flex:1;background:var(--teal);opacity:.8;border-radius:1px}
+  .illus{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--mute);margin-top:16px;text-transform:uppercase}
+
+  .honest{margin-top:34px;border-left:3px solid var(--gold);padding:12px 16px;background:var(--paper-2);font-size:.86rem;color:var(--ink-soft);border-radius:0 3px 3px 0}
+
+  .contact{background:var(--ink-2);color:var(--paper);border-bottom:0}
+  .contact .sec-eyebrow{color:var(--gold)} .contact .sec-title{color:var(--paper)}
+  .contact a.big{font-family:var(--display);font-weight:600;font-size:clamp(1rem,2.4vw,1.45rem);color:var(--paper);letter-spacing:-.005em;border-bottom:2px solid transparent;transition:.2s;display:inline-block;word-break:break-word}
+  .contact a.big:hover{border-bottom-color:var(--gold)}
+  .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:34px}
+  .clinks{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+  .factlist{border-top:1px solid rgba(244,246,241,.16)}
+  .fact{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(244,246,241,.16)}
+  .fact .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(244,246,241,.55)}
+  .fact .v{font-weight:500;text-align:right;font-size:.92rem;color:var(--paper)}
+  .foot{padding:26px 0;text-align:center;background:var(--ink);color:rgba(244,246,241,.5)}
+  .foot .mono{color:rgba(244,246,241,.5)}
+
+  .stats{padding:0;background:var(--paper-2);border-bottom:1px solid var(--line)}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:36px 28px}
+  .stat .n{font-family:var(--display);font-weight:800;font-size:2.1rem;color:var(--teal);line-height:1}
+  .stat .l{font-family:var(--mono);font-size:.64rem;letter-spacing:.07em;text-transform:uppercase;color:var(--mute);margin-top:9px}
+  .character{margin-top:28px;max-width:300px}
+  .chip-fl{animation:bob 3.4s ease-in-out infinite}
+  .chip-fl.c2{animation-delay:.5s}.chip-fl.c3{animation-delay:1s}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .timeline{margin-top:42px;margin-left:7px;border-left:2px solid var(--line)}
+  .tl-item{position:relative;padding:0 0 30px 30px}
+  .tl-item::before{content:"";position:absolute;left:-8px;top:3px;width:13px;height:13px;border-radius:50%;background:var(--teal);border:3px solid var(--paper)}
+  .tl-item.gold::before{background:var(--gold)}
+  .tl-when{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+  .tl-role{font-family:var(--display);font-weight:600;font-size:1.12rem;margin:5px 0 3px}
+  .tl-role span{color:var(--teal)}
+  .tl-desc{font-size:.9rem;color:var(--ink-soft);max-width:62ch}
+  .toolgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:38px}
+  .toolcol h4{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+  .toolcol ul{list-style:none}
+  .toolcol li{font-size:.9rem;padding:6px 0;color:var(--ink-soft);display:flex;align-items:center;gap:9px}
+  .toolcol li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);flex:none}
+  @media(max-width:860px){.stats .wrap{grid-template-columns:repeat(2,1fr)}.toolgrid{grid-template-columns:1fr}}
+
+  .eval-task{font-family:var(--mono);font-size:.76rem;line-height:1.55;background:var(--ink-2);color:#dfeae6;padding:14px;border-radius:4px;margin-bottom:18px}
+  .eval-task .tlbl{color:var(--aqua);letter-spacing:.1em;text-transform:uppercase;font-size:.6rem;display:block;margin-bottom:7px}
+  .eval-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .resp{border:1px solid var(--line);border-radius:5px;overflow:hidden}
+  .resp-h{display:flex;justify-content:space-between;align-items:center;padding:10px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+  .resp-h .rid{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}
+  .resp.win .resp-h{background:rgba(47,125,91,.1)}
+  .verdict-tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:2px}
+  .resp.win .verdict-tag{background:var(--green);color:#fff}
+  .resp.lose .verdict-tag{background:rgba(176,58,46,.14);color:#b03a2e}
+  .resp-body{padding:13px;font-size:.84rem;color:var(--ink-soft)}
+  .resp-body .quote{font-style:italic;border-left:2px solid var(--line);padding-left:10px;margin-bottom:11px}
+  .scoreline{display:flex;flex-wrap:wrap;gap:5px}
+  .scoreline .score-pill{font-size:.58rem}
+  .eval-verdict{margin-top:16px;border:1px dashed var(--line);border-radius:4px;padding:14px;background:var(--paper)}
+  .eval-verdict .lbl{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;display:block}
+  .eval-verdict ul{margin:0 0 0 18px;font-size:.86rem;color:var(--ink-soft)}
+  .eval-verdict li{margin-bottom:5px}
+  .eval-verdict li b{color:var(--ink-2)}
+  @media(max-width:860px){.eval-cols{grid-template-columns:1fr}}
+
+  .gov{display:grid;grid-template-columns:1fr 1fr;gap:20px 30px}
+  .govcol h4{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+  @media(max-width:860px){.gov{grid-template-columns:1fr}}
+
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+  @media(max-width:860px){
+    .herogrid{grid-template-columns:1fr;gap:36px;min-height:auto;padding:90px 0 70px}
+    .about-grid,.cgrid{grid-template-columns:1fr;gap:34px}
+    .prompts{grid-template-columns:1fr}
+    .dash{grid-template-columns:repeat(2,1fr)}
+    .check{columns:1}
+    .navlinks{display:none}
+    .navlinks.open{display:flex;position:absolute;top:62px;left:0;right:0;flex-direction:column;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 0}
+    .navlinks.open a{padding:13px 28px}
+    .navlinks.open .navcta{margin:8px 28px;text-align:center}
+    .burger{display:block}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important;animation:none!important}
+    .scroll-hint{display:none}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav>
+  <div class="navin">
+    <a href="#top" class="brand">B<b>|</b>D &nbsp;BHAGYSHREE DANGLE</a>
+    <button class="burger" id="burger" aria-label="Toggle menu">Menu</button>
+    <div class="navlinks" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact" class="navcta">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="bg3d" aria-hidden="true"></canvas>
+  <div class="wrap herogrid">
+    <div>
+      <div class="hero-eyebrow mono"><span class="dot"></span>AI-Enabled Operations &amp; Quality · Dubai, UAE</div>
+      <h1>
+        <span class="line"><span class="line-inner">Operations you can <span class="em">score</span>,</span></span>
+        <span class="line"><span class="line-inner">repeat, and trust.</span></span>
+      </h1>
+      <p class="lede">10+ years turning executive and quality operations into structured systems — now applying the same rigor to AI: rubrics, prompt libraries, and QA gates that keep output accurate before it ships.</p>
+      <div class="herometa">
+        <span class="tag">Quality Assurance</span>
+        <span class="tag">AI Output Evaluation</span>
+        <span class="tag">Process &amp; SOP Design</span>
+        <span class="tag">Executive Operations</span>
+      </div>
+    </div>
+    <div class="card scorecard" aria-label="Capability scorecard">
+      <div class="sc-head"><span class="ttl">Capability Scorecard</span><span class="pg">self-assessed · honest</span></div>
+      <div class="crit"><div class="crit-top"><span class="crit-name">Quality &amp; Evaluation</span><span class="chip">10+ years</span></div>
+        <div class="bar"><i class="seg on"></i><i class="seg on"></i><i class="seg on"></i><i class="seg on"></i></div>
+        <div class="crit-sub">QA frameworks · rubric scoring · calibration · coaching</div></div>
+      <div class="crit"><div class="crit-top"><span class="crit-name">AI-Enabled Operations</span><span class="chip">daily practice</span></div>
+        <div class="bar"><i class="seg on"></i><i class="seg on"></i><i class="seg on"></i><i class="seg"></i></div>
+        <div class="crit-sub">ChatGPT · Claude · Copilot · Gemini · Perplexity</div></div>
+      <div class="crit"><div class="crit-top"><span class="crit-name">Process &amp; SOP Design</span><span class="chip">proven</span></div>
+        <div class="bar"><i class="seg on"></i><i class="seg on"></i><i class="seg on"></i><i class="seg"></i></div>
+        <div class="crit-sub">trackers · dashboards · job aids · documentation</div></div>
+      <div class="crit"><div class="crit-top"><span class="crit-name">Executive &amp; Stakeholder Ops</span><span class="chip">C-suite level</span></div>
+        <div class="bar"><i class="seg on"></i><i class="seg on"></i><i class="seg on"></i><i class="seg on"></i></div>
+        <div class="crit-sub">governance · board · cross-border coordination</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</header>
+
+<section class="stats" aria-label="At a glance">
+  <div class="wrap">
+    <div class="stat reveal"><div class="n">10+</div><div class="l">Years · QA, Ops &amp; Support</div></div>
+    <div class="stat reveal"><div class="n">6</div><div class="l">Organisations</div></div>
+    <div class="stat reveal"><div class="n">3</div><div class="l">Languages · EN · HI · MR</div></div>
+    <div class="stat reveal"><div class="n">Daily</div><div class="l">AI tools in practice</div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <div class="sec-eyebrow mono">01 — About</div>
+      <h2 class="sec-title">A quality analyst's instinct, pointed at AI.</h2>
+      <div class="character" aria-hidden="true">
+        <svg viewBox="0 0 240 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28 168 Q70 120 112 168" fill="none" stroke="#0f4d45" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="70" cy="76" r="26" fill="none" stroke="#0f4d45" stroke-width="3"/>
+          <circle cx="97" cy="53" r="4" fill="#bf8a2c"/>
+          <g class="chip-fl c1">
+            <rect x="140" y="38" width="84" height="27" rx="6" fill="#ffffff" stroke="#d7ddd2"/>
+            <path d="M150 52 l5 5 l9 -11" fill="none" stroke="#2f7d5b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="172" y="47" width="44" height="3" rx="1.5" fill="#cdd5cc"/>
+            <rect x="172" y="55" width="30" height="3" rx="1.5" fill="#cdd5cc"/>
+          </g>
+          <g class="chip-fl c2">
+            <rect x="150" y="77" width="84" height="27" rx="6" fill="#ffffff" stroke="#d7ddd2"/>
+            <path d="M160 91 l5 5 l9 -11" fill="none" stroke="#2f7d5b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="182" y="86" width="44" height="3" rx="1.5" fill="#cdd5cc"/>
+            <rect x="182" y="94" width="30" height="3" rx="1.5" fill="#cdd5cc"/>
+          </g>
+          <g class="chip-fl c3">
+            <rect x="140" y="116" width="84" height="27" rx="6" fill="#ffffff" stroke="#d7ddd2"/>
+            <path d="M150 130 l5 5 l9 -11" fill="none" stroke="#bf8a2c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="172" y="125" width="44" height="3" rx="1.5" fill="#cdd5cc"/>
+            <rect x="172" y="133" width="30" height="3" rx="1.5" fill="#cdd5cc"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="about reveal">
+      <p>I spent more than a decade making work measurable — building quality-assurance frameworks, scoring outputs against multi-point criteria, and turning loose processes into repeatable systems. Most recently I've run operations for C-suite leaders, where the same discipline keeps governance, decisions, and follow-through on track.</p>
+      <p>That habit transfers cleanly to AI. The hard part of working with generative models isn't generating — it's <em>judging</em>: deciding whether an output is accurate, complete, on-instruction, and safe to use. That's evaluation, and it's what I've always done. I use AI tools daily and treat every output as a draft to be reviewed, not a result to be trusted.</p>
+      <p>The samples below are how I think on paper: the rubrics, prompts, workflows, and checks I build to make AI-assisted work reliable.</p>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-eyebrow mono">02 — Experience</div>
+      <h2 class="sec-title">A decade of making work measurable.</h2>
+      <p class="sec-intro">From insurance-quality analysis to C-suite operations — the through-line is structure, accuracy, and follow-through.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal"><div class="tl-when">Apr 2025 — Present · Dubai</div><div class="tl-role">Personal Assistant to C-Suites, <span>Group SNS</span></div><div class="tl-desc">Governance, board and budget sessions, and executive offsites; AI-assisted document, research, and reporting workflows with a quality check on every output.</div></div>
+      <div class="tl-item reveal"><div class="tl-when">Sep 2024 — Apr 2025 · Dubai</div><div class="tl-role">Executive Assistant to CEO, <span>Bright Minds</span></div><div class="tl-desc">Cross-border operations across India and Canada; operational audits, reporting, vendor and recruitment coordination.</div></div>
+      <div class="tl-item reveal"><div class="tl-when">Nov 2023 — Jul 2024 · Pune</div><div class="tl-role">Senior Associate, <span>ADP</span></div><div class="tl-desc">Global payroll operations — accuracy, compliance, and timely client deliverables through disciplined process monitoring.</div></div>
+      <div class="tl-item reveal"><div class="tl-when">Mar 2021 — Apr 2024 · Remote (USA)</div><div class="tl-role">Executive Secretary to CEO, <span>StandOut Authority</span></div><div class="tl-desc">Remote executive support across time zones; confidential data handling, scheduling, prioritisation, and global travel.</div></div>
+      <div class="tl-item gold reveal"><div class="tl-when">Mar 2015 — Sep 2023 · Pune</div><div class="tl-role">Senior Quality Analyst, <span>WNS Global Services</span></div><div class="tl-desc">Built QA frameworks, procedures, and checklists; reviewed insurance claims (motor, write-off, third-party) on the Suncorp account against multi-point criteria, with calibration and coaching.</div></div>
+      <div class="tl-item reveal"><div class="tl-when">Jul 2011 — Sep 2013 · Pune</div><div class="tl-role">Senior Associate, <span>Mphasis</span></div><div class="tl-desc">Resolved 200+ customer inquiries per week at a 95% resolution rate; recognised for service excellence and problem-solving.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-eyebrow mono">03 — Selected work</div>
+      <h2 class="sec-title">Five specimens of how I structure the work.</h2>
+      <p class="sec-intro">Representative artifacts and templates — the kind I build on the job. They show method and craft; project-specific data and outcomes are shared on request.</p>
+    </div>
+    <div class="specs">
+
+      <article class="spec reveal">
+        <div class="spec-head"><div><div class="spec-no">Sample 01</div><div class="spec-name">AI Output Evaluation Rubric</div></div><span class="spec-kind">Quality &amp; Evaluation</span></div>
+        <div class="spec-body">
+          <p class="spec-desc">A reusable rubric for scoring an AI-generated response before anyone relies on it. Each criterion is scored 0–2 with evidence — the same evidence-based scoring I used reviewing insurance claims at WNS, adapted for model output.</p>
+          <table><thead><tr><th>Criterion</th><th>What I check</th><th>Scale</th></tr></thead><tbody>
+            <tr><td><span class="c-name">Accuracy</span></td><td>Claims are factually correct and grounded; nothing invented.</td><td><span class="score-pill s2">0 · 1 · 2</span></td></tr>
+            <tr><td><span class="c-name">Completeness</span></td><td>Answers the whole request; no missing parts or steps.</td><td><span class="score-pill s2">0 · 1 · 2</span></td></tr>
+            <tr><td><span class="c-name">Instruction adherence</span></td><td>Follows format, scope, and constraints that were asked for.</td><td><span class="score-pill s2">0 · 1 · 2</span></td></tr>
+            <tr><td><span class="c-name">Tone &amp; audience fit</span></td><td>Register matches the reader and the context.</td><td><span class="score-pill s2">0 · 1 · 2</span></td></tr>
+            <tr><td><span class="c-name">Safety &amp; compliance</span></td><td>No sensitive-data leaks, unsafe advice, or policy breaches.</td><td><span class="score-pill s2">0 · 1 · 2</span></td></tr>
+          </tbody></table>
+          <div class="worked"><div class="lbl">Worked example</div>
+            <div class="row"><b>Prompt</b>“Summarise this board paper in 5 bullets for the CFO.”</div>
+            <div class="row"><b>Output</b>6 bullets, accurate, but one figure unverified and tone too casual.</div>
+            <div class="row"><b>Score</b><span class="score-pill s2">Accuracy 2</span> &nbsp;<span class="score-pill s1">Completeness 1</span> &nbsp;<span class="score-pill s1">Tone 1</span></div>
+            <div class="row"><b>Verdict</b>Return for revision — flag the unverified figure, tighten to 5 bullets, lift register.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="spec reveal">
+        <div class="spec-head"><div><div class="spec-no">Sample 02</div><div class="spec-name">Operations Prompt Library</div></div><span class="spec-kind">AI Workflows</span></div>
+        <div class="spec-body">
+          <p class="spec-desc">Reusable prompts for recurring executive-operations tasks, each paired with a guardrail so the output stays safe to use. Built and refined through daily practice.</p>
+          <div class="prompts">
+            <div class="pcard"><div class="pno">P-01</div><h4>Executive brief from raw notes</h4><div class="pcode">Turn these notes into a
+5-bullet brief for [role].
+Lead with the decision
+needed. Mark any figure
+I haven't confirmed.</div><div class="guard"><b>Guardrail</b> · unverified data is flagged, never stated as fact.</div></div>
+            <div class="pcard"><div class="pno">P-02</div><h4>Minutes → action tracker</h4><div class="pcode">From this transcript,
+extract decisions and
+actions as a table:
+owner · action · due.
+Omit discussion.</div><div class="guard"><b>Guardrail</b> · owners left blank if not explicitly named.</div></div>
+            <div class="pcard"><div class="pno">P-03</div><h4>Document QA pass</h4><div class="pcode">Review this draft against
+the checklist below.
+Return only issues found,
+grouped by severity,
+with the line reference.</div><div class="guard"><b>Guardrail</b> · review only — no silent edits to the source.</div></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="spec reveal">
+        <div class="spec-head"><div><div class="spec-no">Sample 03</div><div class="spec-name">AI-Assisted SOP — Board Minutes &amp; Follow-Through</div></div><span class="spec-kind">Process &amp; SOP Design</span></div>
+        <div class="spec-body">
+          <p class="spec-desc">A standard operating procedure that puts a human QA gate between AI drafting and distribution — so speed never comes at the cost of accuracy. The pattern I apply to any AI-in-the-loop workflow.</p>
+          <div class="flow">
+            <div class="step"><div class="sn">Step 1</div><div class="st">Capture</div><div class="stool">Otter.ai</div></div>
+            <div class="step"><div class="sn">Step 2</div><div class="st">Draft minutes</div><div class="stool">ChatGPT / Claude</div></div>
+            <div class="step gate"><div class="sn">Step 3 · gate</div><div class="st">QA review</div><div class="stool">human · rubric</div></div>
+            <div class="step"><div class="sn">Step 4</div><div class="st">Approve &amp; send</div><div class="stool">Outlook</div></div>
+            <div class="step"><div class="sn">Step 5</div><div class="st">Track actions</div><div class="stool">Notion / Asana</div></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="spec reveal">
+        <div class="spec-head"><div><div class="spec-no">Sample 04</div><div class="spec-name">Quality Review Checklist</div></div><span class="spec-kind">Quality Framework</span></div>
+        <div class="spec-body">
+          <p class="spec-desc">An extract from the kind of QA checklist I build to make reviews consistent across a team — every reviewer checking the same things, the same way. The basis of fair calibration.</p>
+          <div class="check">
+            <div class="citem"><span class="box"></span><span>Source data matches the record — no transcription drift</span></div>
+            <div class="citem"><span class="box"></span><span>All mandatory fields complete and in range</span></div>
+            <div class="citem"><span class="box"></span><span>Decision follows the stated policy / criteria</span></div>
+            <div class="citem"><span class="box"></span><span>Calculations independently re-checked</span></div>
+            <div class="citem"><span class="box"></span><span>Tone and wording appropriate for the audience</span></div>
+            <div class="citem"><span class="box"></span><span>Sensitive data handled per compliance rules</span></div>
+            <div class="citem"><span class="box"></span><span>Exceptions escalated with a clear note</span></div>
+            <div class="citem"><span class="box"></span><span>Outcome logged for trend analysis</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="spec reveal">
+        <div class="spec-head"><div><div class="spec-no">Sample 05</div><div class="spec-name">Operations Scorecard — Dashboard Concept</div></div><span class="spec-kind">Reporting &amp; Tracking</span></div>
+        <div class="spec-body">
+          <p class="spec-desc">A layout concept for a weekly operations scorecard — the kind of tracker I set up so leaders see status at a glance. Shown with illustrative placeholders; wired to live data in role.</p>
+          <div class="dash">
+            <div class="tile"><div class="tk">Actions on track</div><div class="tv">—</div><div class="minibar"><span style="height:60%"></span><span style="height:75%"></span><span style="height:68%"></span><span style="height:88%"></span><span style="height:80%"></span></div></div>
+            <div class="tile"><div class="tk">QA pass rate</div><div class="tv">—</div><div class="tnote">vs. target</div></div>
+            <div class="tile"><div class="tk">AI outputs reviewed</div><div class="tv">—</div><div class="tnote">this week</div></div>
+            <div class="tile"><div class="tk">Open escalations</div><div class="tv">—</div><div class="tnote">by owner</div></div>
+          </div>
+          <div class="illus">Illustrative layout · figures populated from live operations data</div>
+        </div>
+      </article>
+
+      <article class="spec reveal">
+        <div class="spec-head"><div><div class="spec-no">Sample 06</div><div class="spec-name">Worked AI Evaluation — Preference Scoring</div></div><span class="spec-kind">Evaluation in practice</span></div>
+        <div class="spec-body">
+          <p class="spec-desc">A real evaluation run: two AI responses to the same brief, each scored against my rubric, then ranked. This is the core of LLM quality work — catching factual errors, instruction misses, and tone issues, then justifying a preference with evidence.</p>
+          <div class="eval-task"><span class="tlbl">The brief given to the model</span>A customer asks why their motor windscreen claim was only partly paid. Draft an empathetic reply under 150 words: explain the policy's £75 glass excess, confirm the remainder was paid, and invite them to call. Do not invent policy details.</div>
+          <div class="eval-cols">
+            <div class="resp lose">
+              <div class="resp-h"><span class="rid">Response A</span><span class="verdict-tag">Not preferred</span></div>
+              <div class="resp-body">
+                <div class="quote">“…a £100 excess applies to glass claims, so the balance was settled. Your claim ref CLM-4471 is now closed…”</div>
+                <div class="scoreline"><span class="score-pill s0">Accuracy 0</span><span class="score-pill s2">Complete 2</span><span class="score-pill s1">Instruction 1</span><span class="score-pill s2">Tone 2</span><span class="score-pill s2">Safety 2</span></div>
+              </div>
+            </div>
+            <div class="resp win">
+              <div class="resp-h"><span class="rid">Response B</span><span class="verdict-tag">Preferred</span></div>
+              <div class="resp-body">
+                <div class="quote">“…your policy carries a £75 excess on glass claims, which is why part wasn't covered. The remaining amount has been paid…”</div>
+                <div class="scoreline"><span class="score-pill s2">Accuracy 2</span><span class="score-pill s2">Complete 2</span><span class="score-pill s2">Instruction 2</span><span class="score-pill s1">Tone 1</span><span class="score-pill s2">Safety 2</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="eval-verdict">
+            <div class="lbl">Verdict &amp; rationale — Response B wins</div>
+            <ul>
+              <li><b>Accuracy (the deciding fault):</b> A states a £100 excess, contradicting the £75 brief, and invents claim ref CLM-4471 — two fabrications a customer would act on.</li>
+              <li><b>Instruction adherence:</b> the brief said don't invent details; A added an unstated reference number, B stayed in scope and under length.</li>
+              <li><b>Tone:</b> B is accurate but slightly procedural — one warmer line would earn the full 2.</li>
+              <li><b>Decision:</b> a factual error that misleads a customer outweighs a minor tone gap, so B is preferred.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="spec reveal">
+        <div class="spec-head"><div><div class="spec-no">Sample 07</div><div class="spec-name">Responsible AI Use — Operating Guardrails</div></div><span class="spec-kind">AI Governance</span></div>
+        <div class="spec-body">
+          <p class="spec-desc">A one-page policy I apply to AI-assisted work — the guardrails that keep generative AI safe to use in a compliance-sensitive, executive setting. Governance that's practical, not theoretical.</p>
+          <div class="gov">
+            <div class="govcol">
+              <h4>Data protection</h4>
+              <div class="citem"><span class="box"></span><span>No client, personal, or financial data entered into public LLMs</span></div>
+              <div class="citem"><span class="box"></span><span>Sensitive content handled only in approved / enterprise tools</span></div>
+            </div>
+            <div class="govcol">
+              <h4>Human review gate</h4>
+              <div class="citem"><span class="box"></span><span>Every AI output reviewed before it ships</span></div>
+              <div class="citem"><span class="box"></span><span>High-stakes or external-facing output gets a second check</span></div>
+            </div>
+            <div class="govcol">
+              <h4>Accuracy &amp; sourcing</h4>
+              <div class="citem"><span class="box"></span><span>Facts and figures verified against the source</span></div>
+              <div class="citem"><span class="box"></span><span>Unverified claims flagged — never stated as fact</span></div>
+            </div>
+            <div class="govcol">
+              <h4>Transparency &amp; audit</h4>
+              <div class="citem"><span class="box"></span><span>AI assistance noted on key deliverables</span></div>
+              <div class="citem"><span class="box"></span><span>Audit trail kept for decisions and approvals</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <div class="honest reveal"><b>A note on honesty:</b> these are work samples and templates that demonstrate method, built from real experience — not client deliverables. I share project-specific results and references on request, and I'd rather show you exactly how I work than overstate a number.</div>
+  </div>
+</section>
+
+<section id="toolkit">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-eyebrow mono">04 — Toolkit</div>
+      <h2 class="sec-title">Tools I work in every day.</h2>
+    </div>
+    <div class="toolgrid">
+      <div class="toolcol reveal"><h4>AI &amp; LLM tools</h4><ul>
+        <li>ChatGPT</li><li>Claude</li><li>Microsoft Copilot</li><li>Gemini</li><li>Perplexity</li><li>Otter.ai</li><li>Jasper</li><li>Krisp</li><li>Beautiful.ai</li></ul></div>
+      <div class="toolcol reveal"><h4>Workflow &amp; automation</h4><ul>
+        <li>Notion</li><li>Asana</li><li>ClickUp</li><li>HubSpot (CRM)</li><li>Zapier</li><li>Airtable</li><li>Slack</li><li>Calendly</li><li>Excel / Google Sheets</li></ul></div>
+      <div class="toolcol reveal"><h4>Quality &amp; operations</h4><ul>
+        <li>QA frameworks &amp; rubrics</li><li>Calibration &amp; governance</li><li>SOPs &amp; job aids</li><li>Dashboards &amp; trackers</li><li>Compliance review</li><li>Stakeholder reporting</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-eyebrow mono">05 — Get in touch</div>
+      <h2 class="sec-title">Open to AI operations &amp; quality roles — UAE, the Gulf, or remote.</h2>
+    </div>
+    <div class="cgrid">
+      <div class="clinks reveal">
+        <a class="big" href="mailto:bhagyshreed12@gmail.com">bhagyshreed12@gmail.com</a>
+        <a class="big" href="https://www.linkedin.com/in/bhagyshree-dangle/" target="_blank" rel="noopener">linkedin.com/in/bhagyshree-dangle</a>
+        <a class="big" href="tel:+971582879630">+971 58 287 9630</a>
+      </div>
+      <div class="reveal">
+        <div class="factlist">
+          <div class="fact"><span class="k">Based in</span><span class="v">Al Furjan, Dubai, UAE</span></div>
+          <div class="fact"><span class="k">Availability</span><span class="v">On-site (UAE / Gulf) or remote</span></div>
+          <div class="fact"><span class="k">Résumé</span><span class="v">Tailored CV on request</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="foot"><div class="wrap mono">© 2026 Bhagyshree Dangle — built to be checked, not just read.</div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- mobile nav ---------- */
+  var burger=document.getElementById('burger'), nav=document.getElementById('navlinks');
+  if(burger&&nav){
+    burger.addEventListener('click',function(){nav.classList.toggle('open');});
+    nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');});});
+  }
+
+  /* ---------- scroll progress ---------- */
+  var pbar=document.getElementById('progress');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop/((h.scrollHeight-h.clientHeight)||1);
+    if(pbar) pbar.style.transform='scaleX('+sc+')';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  /* ---------- 3D lattice hero ---------- */
+  (function init3D(){
+    var canvas=document.getElementById('bg3d');
+    if(!canvas || !window.THREE){ return; }
+    try{
+      var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+      var scene=new THREE.Scene();
+      scene.fog=new THREE.FogExp2(0x0a1c1a,0.045);
+      var camera=new THREE.PerspectiveCamera(55,1,0.1,100);
+      camera.position.set(0,0,17);
+      scene.add(new THREE.AmbientLight(0xffffff,0.6));
+      var dir=new THREE.DirectionalLight(0xbfe9df,0.95); dir.position.set(6,9,11); scene.add(dir);
+      var dir2=new THREE.DirectionalLight(0x56d6c2,0.35); dir2.position.set(-8,-4,6); scene.add(dir2);
+
+      var group=new THREE.Group(); scene.add(group);
+      var geo=new THREE.BoxGeometry(0.34,0.34,0.34);
+      var tealMat=new THREE.MeshStandardMaterial({color:0x1b7a6e,roughness:0.45,metalness:0.15});
+      var goldMat=new THREE.MeshStandardMaterial({color:0xc8922f,roughness:0.35,metalness:0.25,emissive:0x4a3408,emissiveIntensity:0.5});
+
+      // build a lattice shell
+      var N=6, gap=1.85, off=(N-1)*gap/2, pts=[];
+      for(var x=0;x<N;x++)for(var y=0;y<N;y++)for(var z=0;z<N;z++){
+        // keep mostly the shell for an airy look
+        var edge=(x===0||x===N-1)+(y===0||y===N-1)+(z===0||z===N-1);
+        if(edge>=1 || Math.random()<0.12){
+          pts.push([x*gap-off,y*gap-off,z*gap-off]);
+        }
+      }
+      var goldEvery=11;
+      var goldPts=[], tealPts=[];
+      pts.forEach(function(p,i){ (i%goldEvery===0?goldPts:tealPts).push(p); });
+
+      function fill(mesh,arr){
+        var d=new THREE.Object3D();
+        for(var i=0;i<arr.length;i++){ d.position.set(arr[i][0],arr[i][1],arr[i][2]); d.updateMatrix(); mesh.setMatrixAt(i,d.matrix); }
+        mesh.instanceMatrix.needsUpdate=true;
+      }
+      var tealMesh=new THREE.InstancedMesh(geo,tealMat,tealPts.length); fill(tealMesh,tealPts); group.add(tealMesh);
+      var goldMesh=new THREE.InstancedMesh(geo,goldMat,goldPts.length); fill(goldMesh,goldPts); group.add(goldMesh);
+
+      group.rotation.set(0.5,0.6,0);
+
+      function resize(){
+        var w=canvas.clientWidth||canvas.offsetWidth, h=canvas.clientHeight||canvas.offsetHeight;
+        if(!w||!h) return;
+        renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix();
+      }
+      window.addEventListener('resize',resize); resize();
+
+      var mx=0,my=0,tx=0,ty=0;
+      window.addEventListener('pointermove',function(e){
+        tx=(e.clientX/window.innerWidth-0.5); ty=(e.clientY/window.innerHeight-0.5);
+      },{passive:true});
+
+      if(reduce){ renderer.render(scene,camera); return; }
+
+      var hero=document.getElementById('top'); var visible=true;
+      if('IntersectionObserver' in window){
+        new IntersectionObserver(function(es){ visible=es[0].isIntersecting; },{threshold:0.01}).observe(hero);
+      }
+      var t=0;
+      function loop(){
+        requestAnimationFrame(loop);
+        if(document.hidden||!visible) return;
+        t+=0.016;
+        mx+=(tx-mx)*0.05; my+=(ty-my)*0.05;
+        group.rotation.y+=0.0016;
+        group.rotation.x=0.5+my*0.5;
+        group.rotation.z=mx*0.25;
+        var s=1+Math.sin(t*0.6)*0.025; group.scale.set(s,s,s);
+        camera.position.x=mx*3; camera.position.y=-my*2; camera.lookAt(0,0,0);
+        renderer.render(scene,camera);
+      }
+      loop();
+    }catch(err){ /* WebGL unavailable — silent, gradient hero remains */ }
+  })();
+
+  /* ---------- motion (GSAP) with fallback ---------- */
+  function showAll(){ document.querySelectorAll('.reveal').forEach(function(el){el.style.opacity=1;el.style.transform='none';}); }
+
+  if(reduce || !window.gsap){
+    showAll();
+  }else{
+    try{
+      gsap.registerPlugin(ScrollTrigger);
+      // hero intro
+      var tl=gsap.timeline({defaults:{ease:'power3.out'}});
+      tl.from('#bg3d',{opacity:0,duration:1.3})
+        .from('.hero-eyebrow',{y:18,opacity:0,duration:.6},'-=.7')
+        .from('.line-inner',{yPercent:115,opacity:0,stagger:.12,duration:.85},'-=.35')
+        .from('.lede',{y:18,opacity:0,duration:.6},'-=.4')
+        .from('.tag',{y:12,opacity:0,stagger:.06,duration:.4},'-=.35')
+        .from('.scorecard',{y:34,opacity:0,duration:.85},'-=.7');
+      // scorecard bars
+      gsap.from('.scorecard .seg.on',{scrollTrigger:{trigger:'.scorecard',start:'top 78%'},scaleX:0,stagger:.035,duration:.5,ease:'power2.out'});
+      // section reveals
+      gsap.utils.toArray('.reveal').forEach(function(el){
+        gsap.from(el,{scrollTrigger:{trigger:el,start:'top 86%'},y:34,opacity:0,duration:.8,ease:'power3.out'});
+      });
+    }catch(e){ showAll(); }
+  }
+
+  /* ---------- 3D tilt on specimen cards ---------- */
+  if(!reduce && !('ontouchstart' in window)){
+    document.querySelectorAll('.spec').forEach(function(card){
+      card.addEventListener('pointermove',function(e){
+        var r=card.getBoundingClientRect();
+        var px=(e.clientX-r.left)/r.width-0.5, py=(e.clientY-r.top)/r.height-0.5;
+        card.style.transform='rotateY('+(px*5)+'deg) rotateX('+(-py*5)+'deg) translateZ(0)';
+      });
+      card.addEventListener('pointerleave',function(){ card.style.transform='rotateY(0) rotateX(0)'; });
+    });
+  }
+
+  /* ---------- safety net: never leave content hidden ---------- */
+  setTimeout(function(){
+    document.querySelectorAll('.reveal').forEach(function(el){
+      if(getComputedStyle(el).opacity==='0'){ el.style.opacity=1; el.style.transform='none'; }
+    });
+  },2600);
+})();
+</script>
+</body>
+</html>
